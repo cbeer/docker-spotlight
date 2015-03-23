@@ -1,0 +1,20 @@
+web:
+  build: .
+  command: "/sbin/my_init"
+  links:
+    - db
+    - solr
+  ports:
+  - "80"
+  environment:
+    - SECRET_KEY_BASE=xyz
+
+db:
+  image: postgres
+
+solr:
+  image: cbeer/docker-solr-cloud
+  ports: 
+  - "8983"
+  volumes:
+   - solr-configsets:/opt/solr/server/solr/configsets
